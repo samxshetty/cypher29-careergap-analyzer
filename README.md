@@ -5,11 +5,10 @@ Theme: Education & Skilling
 
 ---
 
-## Problem
-Students and young professionals often struggle to understand **why their resumes don’t match industry expectations**.  
-Guidance is usually **generic, not personalized**, and does not highlight the **exact missing skills** needed for a target role.
-
----
+## Problem ##
+-
+Students and young professionals often struggle to understand why their resumes don’t match industry expectations. They may have some skills but lack visibility into which ones are missing for their target job roles. There is no quick, AI-powered way to analyze career gaps and get personalized guidance
+-
 
 ## Solution
 Career Gap Analyzer is an AI-powered tool that:
