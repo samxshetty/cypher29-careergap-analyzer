@@ -5,10 +5,15 @@ Theme: Education & Skilling
 
 ---
 
+## Description ##
+Career Gap Analyzer is an AI-powered platform that helps students and professionals bridge the gap between their current skills and industry expectations. By uploading a resume and selecting a target job role, the system uses Azure Cognitive Services to extract skills and experiences, and Azure OpenAI to compare them with job requirements. The tool then highlights missing skills, calculates a match percentage, and generates a personalized learning path with recommended courses, certifications, and projects. This provides learners with clear, actionable insights to improve employability, reduce underemployment, and accelerate career growth in today’s fast-changing job market.
+
+---
+
 ## Problem ##
--
-Students and young professionals often struggle to understand why their resumes don’t match industry expectations. They may have some skills but lack visibility into which ones are missing for their target job roles. There is no quick, AI-powered way to analyze career gaps and get personalized guidance
--
+Students and young professionals often fail to understand why their resumes do not meet industry standards. They may possess some skills but lack visibility into the missing competencies required for their target roles. Current career platforms focus on job listings or generic advice, without personalized AI-driven analysis of resumes against job descriptions. As a result, many capable graduates and professionals face frustration, wasted time, and underemployment, not because of lack of potential, but due to lack of clarity on specific gaps. There is an urgent need for an intelligent tool that identifies these gaps and offers actionable upskilling paths.
+
+---
 
 ## Solution
 Career Gap Analyzer is an AI-powered tool that:
