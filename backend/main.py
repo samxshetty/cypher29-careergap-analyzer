@@ -1,5 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import io, os, json, requests
@@ -10,19 +12,19 @@ from docx import Document as DocxDocument
 # =========================
 # FastAPI App Setup
 # =========================
-app = FastAPI(title="Career Gap Analyzer API", version="0.2.0")
+app = FastAPI(title="Career Gap Analyzer API", version="1.0.0")
 
-# Allow frontend (React) to call backend
+# CORS (for safety if frontend ever runs separately)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # allow all for dev; restrict later in prod
+    allow_origins=["*"],   # In production, restrict this
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # =========================
-# Models (Response Schema)
+# Models
 # =========================
 class Recommendation(BaseModel):
     title: str
@@ -38,10 +40,8 @@ class AnalyzeResult(BaseModel):
     debug: Optional[Dict[str, Any]] = None
 
 # =========================
-# Helpers
+# Skills + Resources
 # =========================
-
-# Expanded skills list
 SKILL_SEED = [
     "python", "java", "c++", "sql", "azure", "aws", "gcp",
     "docker", "kubernetes", "fastapi", "flask", "pandas",
@@ -51,7 +51,6 @@ SKILL_SEED = [
     "openai", "react", "javascript", "dsa", "oop"
 ]
 
-# Load skills → resources map
 RESOURCES_PATH = os.path.join(os.path.dirname(__file__), "skills_resources.json")
 if os.path.exists(RESOURCES_PATH):
     with open(RESOURCES_PATH, "r", encoding="utf-8") as f:
@@ -59,8 +58,11 @@ if os.path.exists(RESOURCES_PATH):
 else:
     SKILL_RESOURCES = {}
 
+# =========================
+# Helper Functions
+# =========================
 def read_resume_text(file: UploadFile) -> str:
-    """Extract text from PDF/DOCX resume."""
+    """Extract text from PDF/DOCX."""
     name = (file.filename or "").lower()
     data = file.file.read()
 
@@ -77,7 +79,7 @@ def read_resume_text(file: UploadFile) -> str:
         raise HTTPException(status_code=400, detail="Could not parse resume. Use PDF/DOCX.")
 
 def fetch_jd_from_url(url: str) -> str:
-    """Fetch JD text from a webpage (e.g., LinkedIn/Indeed)."""
+    """Fetch JD text from webpage."""
     try:
         resp = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
         resp.raise_for_status()
@@ -91,23 +93,21 @@ def fetch_jd_from_url(url: str) -> str:
     return text[:20000]
 
 def extract_skills(text: str) -> List[str]:
-    """Improved skill detection by substring matching against seed list."""
+    """Simple substring-based skill detection."""
     text_l = text.lower()
     found = []
     for s in SKILL_SEED:
-        if s in text_l:  # substring match instead of exact-space match
+        if s in text_l:
             found.append(s)
     return sorted(set(found))
 
 def jaccard(a: List[str], b: List[str]) -> float:
-    """Simple similarity metric."""
     A, B = set(a), set(b)
     if not (A or B):
         return 0.0
     return len(A & B) / len(A | B)
 
 def build_recommendations(missing: List[str]) -> List[Dict[str, Any]]:
-    """Return learning resources for missing skills."""
     out: List[Dict[str, Any]] = []
     for ms in missing:
         items = SKILL_RESOURCES.get(ms, [])
@@ -124,7 +124,6 @@ def build_recommendations(missing: List[str]) -> List[Dict[str, Any]]:
 # =========================
 # Routes
 # =========================
-
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -160,3 +159,10 @@ async def analyze(
         recommendations=[Recommendation(**x) for x in recs],
         debug={"resume_skills": rskills, "jd_skills": jskills}
     )
+
+# =========================
+# Serve Frontend
+# =========================
+frontend_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
