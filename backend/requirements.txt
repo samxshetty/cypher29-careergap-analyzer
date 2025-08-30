@@ -1,10 +1,8 @@
-streamlit
 fastapi
 uvicorn[standard]
-requests
-python-multipart
+gunicorn
 pypdf
 python-docx
+requests
 beautifulsoup4
-lxml
-gunicorn
+python-multipart
