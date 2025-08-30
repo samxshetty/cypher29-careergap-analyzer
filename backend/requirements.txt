@@ -1,0 +1,9 @@
+streamlit
+fastapi
+uvicorn[standard]
+requests
+python-multipart
+pypdf
+python-docx
+beautifulsoup4
+lxml

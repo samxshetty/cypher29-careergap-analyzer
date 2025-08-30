@@ -1,0 +1,126 @@
+{
+  "azure": [
+    {
+      "title": "Microsoft Azure Fundamentals (AZ-900)",
+      "type": "Certification",
+      "link": "https://learn.microsoft.com/azure/certifications/azure-fundamentals/",
+      "why": "Foundation for Azure cloud services."
+    },
+    {
+      "title": "Azure Fundamentals Learning Path",
+      "type": "Course",
+      "link": "https://learn.microsoft.com/training/paths/azure-fundamentals/",
+      "why": "Hands-on modules to understand core Azure concepts."
+    }
+  ],
+  "aws": [
+    {
+      "title": "AWS Cloud Practitioner Essentials",
+      "type": "Course",
+      "link": "https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/",
+      "why": "Covers AWS basics for cloud roles."
+    }
+  ],
+  "gcp": [
+    {
+      "title": "Google Cloud Digital Leader Training",
+      "type": "Course",
+      "link": "https://cloud.google.com/training/courses/cloud-digital-leader",
+      "why": "Introduction to GCP services and cloud concepts."
+    }
+  ],
+  "docker": [
+    {
+      "title": "Docker Hands-on Tutorial",
+      "type": "Lab",
+      "link": "https://docs.docker.com/get-started/",
+      "why": "Learn containerization basics."
+    }
+  ],
+  "kubernetes": [
+    {
+      "title": "Kubernetes Basics",
+      "type": "Interactive Guide",
+      "link": "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
+      "why": "Learn orchestration for scaling apps."
+    }
+  ],
+  "tensorflow": [
+    {
+      "title": "DeepLearning.AI TensorFlow Developer",
+      "type": "Specialization",
+      "link": "https://www.coursera.org/professional-certificates/tensorflow-in-practice",
+      "why": "Covers model building and deployment with TensorFlow."
+    }
+  ],
+  "pytorch": [
+    {
+      "title": "Deep Learning with PyTorch",
+      "type": "Course",
+      "link": "https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html",
+      "why": "Hands-on intro to PyTorch for deep learning."
+    }
+  ],
+  "react": [
+    {
+      "title": "React Docs — Quick Start",
+      "type": "Guide",
+      "link": "https://react.dev/learn",
+      "why": "Official React learning path."
+    }
+  ],
+  "javascript": [
+    {
+      "title": "JavaScript DOM Crash Course",
+      "type": "Course",
+      "link": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents",
+      "why": "Improve frontend skills with DOM basics."
+    }
+  ],
+  "dsa": [
+    {
+      "title": "LeetCode Explore DSA",
+      "type": "Practice",
+      "link": "https://leetcode.com/explore/learn/",
+      "why": "Strengthen Data Structures and Algorithms for coding interviews."
+    },
+    {
+      "title": "CS50 Data Structures",
+      "type": "Course",
+      "link": "https://cs50.harvard.edu/x/2025/",
+      "why": "Harvard CS50 introduces DSA fundamentals."
+    }
+  ],
+  "oop": [
+    {
+      "title": "Object-Oriented Programming in Python",
+      "type": "Course",
+      "link": "https://realpython.com/python3-object-oriented-programming/",
+      "why": "Learn OOP principles with Python."
+    }
+  ],
+  "sql": [
+    {
+      "title": "SQLBolt — Interactive SQL",
+      "type": "Course",
+      "link": "https://sqlbolt.com/",
+      "why": "Learn SQL basics step by step."
+    }
+  ],
+  "git": [
+    {
+      "title": "Atlassian Git Tutorials",
+      "type": "Guide",
+      "link": "https://www.atlassian.com/git",
+      "why": "Learn version control workflows."
+    }
+  ],
+  "linux": [
+    {
+      "title": "Linux Basics for Beginners",
+      "type": "Guide",
+      "link": "https://ubuntu.com/tutorials/command-line-for-beginners",
+      "why": "Essential Linux commands for engineers."
+    }
+  ]
+}
