@@ -47,7 +47,8 @@ export default function IndexPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
 
-  const API_URL = "http://127.0.0.1:8000/analyze"; // backend API
+  // ✅ Use deployed Azure backend instead of localhost
+  const API_URL = "https://cypher29-career.azurewebsites.net/analyze";
 
   const handleAnalyze = async () => {
     if (!resume) {
@@ -76,7 +77,7 @@ export default function IndexPage() {
       setResult(data);
     } catch (err) {
       console.error(err);
-      alert("Error calling backend. Check if it's running on port 8000.");
+      alert("Error calling backend. Please check the API URL or server status.");
     } finally {
       setLoading(false);
     }
