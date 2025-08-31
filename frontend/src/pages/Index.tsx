@@ -47,8 +47,8 @@ export default function IndexPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
 
-  // ✅ Use deployed Azure backend instead of localhost
-  const API_URL = "https://cypher29-career.azurewebsites.net/analyze";
+  const API_URL = import.meta.env.VITE_API_URL + "/analyze";
+
 
   const handleAnalyze = async () => {
     if (!resume) {
