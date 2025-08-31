@@ -10,18 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repo
       - uses: actions/checkout@v3
 
+      # Setup Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
+      # Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      # Build frontend
       - name: Build frontend
         run: |
           cd frontend
@@ -31,15 +35,17 @@ jobs:
           rm -rf backend/static
           mv frontend/dist backend/static
 
+      # Install backend deps
       - name: Install backend dependencies
         run: |
           cd backend
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Deploy to Azure
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          app-name: "cypher29-career"   # Hardcoded app name
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: backend
