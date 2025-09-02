@@ -2,18 +2,14 @@ import streamlit as st
 import requests
 from typing import Dict, Any, Optional
 
-# =============================
 # Page Config
-# =============================
 st.set_page_config(
     page_title="Career Gap Analyzer — Team Cypher29",
     page_icon="🧭",
     layout="wide",
 )
 
-# =============================
 # LIGHT THEME CSS (forces light look)
-# =============================
 st.markdown("""
 <style>
 /* Hide Streamlit chrome */
@@ -95,9 +91,7 @@ footer{visibility:hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-# =============================
 # Backend helper
-# =============================
 def call_backend(api_base: str, resume_file, jd_text: str, jd_url: str) -> Dict[str, Any]:
     url = api_base.rstrip("/") + "/analyze"
     files = {"resume": (resume_file.name, resume_file.getvalue())}
@@ -140,18 +134,14 @@ def mock_analyze() -> Dict[str, Any]:
         ]
     }
 
-# =============================
 # Sidebar (Settings)
-# =============================
 with st.sidebar:
     st.title("⚙️ Settings")
     api_base = st.text_input("FastAPI Base URL", value="http://localhost:8000")
     use_mock = st.toggle("Use Mock Analyzer", value=True)
     show_debug = st.toggle("Debug Mode", value=False)
 
-# =============================
 # Header
-# =============================
 st.markdown("""
 <div class='big-header'>
   <h1>Career Gap Analyzer</h1>
@@ -160,9 +150,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# =============================
 # Inputs
-# =============================
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 c1, c2 = st.columns(2)
 with c1:
@@ -178,9 +166,7 @@ with c2:
         jd_url = st.text_input("Paste JD URL here")
 st.markdown("</div>", unsafe_allow_html=True)
 
-# =============================
 # Analyze button
-# =============================
 if st.button("🔍 Analyze Resume vs JD", use_container_width=True):
     if not resume_file:
         st.error("Please upload a resume.")
@@ -194,9 +180,7 @@ if st.button("🔍 Analyze Resume vs JD", use_container_width=True):
             except Exception as e:
                 st.error(f"Error: {e}")
 
-# =============================
 # Results
-# =============================
 result: Optional[Dict[str, Any]] = st.session_state.get("result")
 if result:
     st.markdown("<div class='card'>", unsafe_allow_html=True)
@@ -257,6 +241,6 @@ if result:
 # =============================
 st.markdown(
     "<p style='text-align:center;color:#94a3b8;font-size:0.85rem;margin-top:2rem;'>"
-    "Built with ❤️ by Team Cypher29 · Streamlit + FastAPI</p>",
+    "Built with ❤️ by Team Cypher29</p>",
     unsafe_allow_html=True
 )

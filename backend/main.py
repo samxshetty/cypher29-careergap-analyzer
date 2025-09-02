@@ -9,9 +9,7 @@ from bs4 import BeautifulSoup
 from pypdf import PdfReader
 from docx import Document as DocxDocument
 
-# =========================
 # FastAPI App Setup
-# =========================
 app = FastAPI(title="Career Gap Analyzer API", version="1.0.0")
 
 # CORS (for safety if frontend ever runs separately)
@@ -23,9 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# =========================
 # Models
-# =========================
 class Recommendation(BaseModel):
     title: str
     type: str
@@ -39,9 +35,7 @@ class AnalyzeResult(BaseModel):
     recommendations: List[Recommendation]
     debug: Optional[Dict[str, Any]] = None
 
-# =========================
 # Skills + Resources
-# =========================
 SKILL_SEED = [
     "python", "java", "c++", "sql", "azure", "aws", "gcp",
     "docker", "kubernetes", "fastapi", "flask", "pandas",
@@ -58,9 +52,7 @@ if os.path.exists(RESOURCES_PATH):
 else:
     SKILL_RESOURCES = {}
 
-# =========================
 # Helper Functions
-# =========================
 def read_resume_text(file: UploadFile) -> str:
     """Extract text from PDF/DOCX."""
     name = (file.filename or "").lower()
@@ -121,9 +113,9 @@ def build_recommendations(missing: List[str]) -> List[Dict[str, Any]]:
         out.extend(items[:1])
     return out[:6]
 
-# =========================
+
+
 # Routes
-# =========================
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -160,9 +152,7 @@ async def analyze(
         debug={"resume_skills": rskills, "jd_skills": jskills}
     )
 
-# =========================
 # Serve Frontend
-# =========================
 frontend_dir = os.path.join(os.path.dirname(__file__), "static")
 if os.path.exists(frontend_dir):
     app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
